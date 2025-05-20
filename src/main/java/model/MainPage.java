@@ -37,7 +37,7 @@ public class MainPage {
     }
     //Теперь принимаем куки и закрываем окно
     public void closeCookie() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(closeCookie)).click();
     }
 

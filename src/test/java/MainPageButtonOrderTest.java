@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(Parameterized.class)
 public class MainPageButtonOrderTest {
     private static final String MAIN_PAGE_URL="https://qa-scooter.praktikum-services.ru/"; //гл. Страница
-    private static final String BROWSER_NAME="Google Chrome";
+    private static final String BROWSER_NAME="Chrome";
 
     private static WebDriver driver;
     private final String selectButton;

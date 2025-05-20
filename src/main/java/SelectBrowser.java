@@ -14,4 +14,6 @@ public class SelectBrowser {
             throw new RuntimeException("Значение константы BROWSER_NAME: Google Chrome или Firefox");
         }
     }
+
+
 }

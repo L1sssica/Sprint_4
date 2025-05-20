@@ -24,8 +24,10 @@ public class PageOrderForWhomScooter {
     private final By fieldForPhone = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
     //Пишем локатор для кнопки "Далее"
     private final By buttonNext = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Далее']");
-
-
+    //Локатор для выпадающего списка станций метро (Юго-Западная)
+    private final By southwest = By.xpath("//div[contains(text(), 'Юго-Западная')]");
+    //Локатор для выпадающего списка станций метро (Юго-Западная)
+    private final By izmailovo = By.xpath("//div[contains(text(), 'Измайлово')]");
     //конструктор класса
     public PageOrderForWhomScooter(WebDriver driver) {
         this.driver = driver;
@@ -54,7 +56,8 @@ public class PageOrderForWhomScooter {
     //Метод заполнения поля "Станция метро"
     public void testFieldMetroStation(String metroStation) {
         driver.findElement(fieldMetroStation).sendKeys(metroStation);
-        driver.findElement(By.xpath(".//*[@class='Order_Text__2broi' and text() = '" + metroStation + "']")).click();
+        By stationLocator = metroStation.contains("Измайлово") ? izmailovo : southwest;
+        driver.findElement(stationLocator).click();
     }
 
     //Метод заполнения поля "Телефон"
@@ -68,6 +71,8 @@ public class PageOrderForWhomScooter {
                 .until(ExpectedConditions.elementToBeClickable(buttonNext));
         driver.findElement(buttonNext).click();
     }
+
+
 }
 
 
