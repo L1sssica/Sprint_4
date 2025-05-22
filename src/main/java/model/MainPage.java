@@ -11,7 +11,8 @@ import java.time.Duration;
 
 public class MainPage {
     private final WebDriver driver;
-    
+    private final WebDriverWait wait;
+
 
     //Сначала пишем локатор кнопки "Заказать", которая находится сверху главной страницы
     private final By topButton = By.xpath(".//button[@class='Button_Button__ra12g' and text()='Заказать']");
@@ -23,32 +24,34 @@ public class MainPage {
     //Пишем конструктор класса
     public MainPage(WebDriver driver) {
         this.driver = driver;
-        
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
+
     //Нажимаем на верхнюю кнопку "Заказать"
     public void clickOnTheTopButton() {
-        WebElement driverElement = driver.findElement(topButton);
-        driverElement.click();
+        driver.findElement(topButton).click();
     }
+
     //Нажимаем на нижнюю кнопку "Заказать"
-    public void clickOnTheBottomButton(){
-        WebElement driverElement = driver.findElement(bottomButton);
-        driverElement.click();
+    public void clickOnTheBottomButton() {
+        driver.findElement(bottomButton).click();
     }
+
     //Теперь принимаем куки и закрываем окно
     public void closeCookie() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(closeCookie)).click();
     }
 
     //нажимаем кнопку "Сколько это стоит"
-    public void howMuchCostQuestionClick(String question) {
-        driver.findElement(By.xpath(".//div[contains(text(), '" + question + "')]")).click();
+    public void clickQuestion(String question) {
+        By questionLocator = By.xpath(".//div[contains(text(), '" + question + "')]");
+        wait.until(ExpectedConditions.elementToBeClickable(questionLocator)).click();
     }
 
     //проверяем, отображение текста
     public boolean answerIsDisplayed(String answer) {
-        return driver.findElement(By.xpath(".//p[text() = '" + answer + "']")).isDisplayed();
-    }
+        By answerLocator = By.xpath(".//p[text() = '" + answer + "']");
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(answerLocator)).isDisplayed();
+    } // совсем не понимаю, как тут не использовать текст вопроса, не понимаю, что тогда писать в локаторе, или он не нужен
 }
 
